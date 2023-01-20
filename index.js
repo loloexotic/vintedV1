@@ -22,7 +22,7 @@ app.use(userRoutes);
 app.use(offerRoutes);
 
 app.get("/", (req, res) => {
-  res.status.json({ message: "Bienvenue dans mon serveur" });
+  res.json({ message: "Bienvenue dans mon serveur" });
 });
 app.all("*", (req, res) => {
   res.status(404).json({ message: "This route doesn't exist" });
