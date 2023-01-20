@@ -8,7 +8,7 @@ const User = require("../models/Sign_up");
 const Offer = require("../models/Offer");
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD.NAME,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUIDNARY_API_KEY,
   api_secret: process.env.CLOUIDNARY_API_SECRET,
   secure: true,
