@@ -36,7 +36,7 @@ router.post(
         product_name: title,
         product_description: description,
         product_price: price,
-        // product_details: array donc tableau =>
+
         product_details: [
           {
             MARQUE: brand,
@@ -50,9 +50,7 @@ router.post(
         owner: req.user,
       });
       console.log(req.body);
-      /*const offerPublished = await Offer.find({product_name,product_description
-      product_price,product_details:[MARQUE,TAILLE,ETAT,COULEUR,EMPLACEMENT],
-      product_image,owner}).populate("owner");*/
+
       await newOffer.save();
       res.json(newOffer);
     } catch (error) {
@@ -63,10 +61,10 @@ router.post(
 
 router.get("/offers", async (req, res) => {
   try {
-    const { title, priceMin, priceMax, sort, page } = req.query;
+    //const { title, priceMin, priceMax, sort, page } = req.query;
     const results = await Offer.find({
-      product_name: /typeof String/i,
-      product_price: { $gte: 0, $lte: 200 },
+      product_name: regExp,
+      product_price: { $gte: 10, $lte: 200 },
     })
       .sort({ product_price: -1 })
       .skip(1)
@@ -79,8 +77,6 @@ router.get("/offers", async (req, res) => {
 });
 
 router.put("/update", isAuthenticated, fileUpload(), async (req, res) => {
-  const filters = Offer;
-
   const { title, description, price, condition, city, brand, size, color } =
     req.body;
   const publishToModify = await Offer.findOneAndUpdate(req.body, { new: true });

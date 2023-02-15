@@ -17,18 +17,14 @@ router.post("/user/signup", async (req, res) => {
         error: { message: "This email already exist" },
       });
     }
-    //je vais return pour mettre fin à la route lorsque la condition est remplie
-    // car il ne peut y avoir 1 seule reponse par route (res.json)
+
     if (!req.body.username) {
       return res.status(400).json({
         error: { message: "An username is needed" },
       });
     }
     // yes ma condition fonctionne pour le username is needed
-    /* on peut aussi mettre une condition pour verifier tous les parametres
-    if (!username || !email || !password || typeof newsletter !== "boolean"){
-        return res.status(400).json({message:"missing parameters"}),
-    } a savoir qu'il existe un package pour verifier c parametres (validator() */
+
     const salt = uid2(16);
     console.log("salt : ", salt);
     const hash = SHA256(salt + password).toString(encBase64);
